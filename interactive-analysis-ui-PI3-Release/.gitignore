@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.map
+*.log
+*.swp
+package-lock.json
+settings.json
+coverage/
+.scannerwork/

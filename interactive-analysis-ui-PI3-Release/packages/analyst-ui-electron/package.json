@@ -1,0 +1,64 @@
+{
+  "name": "@gms/analyst-ui-electron",
+  "productName": "GMS Interactive Analysis",
+  "author": "GMS Development Team",
+  "version": "0.1.0",
+  "description": "Electron window management for GMS analyst UI",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab/gms/core/interactive-analysis/interactive-analysis-ui"
+  },
+  "main": "./build/analyst-ui-electron.js",
+  "scripts": {
+    "lint": "tslint --project ./tsconfig.json --config ./tslint.json 'src/**/*.{ts,tsx}'",
+    "lint-fix": "npm run lint -- --fix",
+    "precommit": "lint-staged",
+    "build": "npm run lint-fix && webpack --progress && tsc",
+    "test": "echo \"no tests in analyst-ui-electron yet...\"",
+    "sonar": "echo \"run 'npm run sonar' from the top-level directory\"",
+    "watch": "tsc --watch",
+    "start": "webpack --progress && tsc && electron .",
+    "generate-bin": "npm run build && npm run generate-darwin-x64 && npm run generate-win32-x64",
+    "generate-darwin-x64": "electron-packager . --platform=darwin --arch=x64 --icon=gms-logo.icns --out dist --no-package-manager",
+    "generate-win32-x64": "electron-packager . --platform=win32 --arch=x64 --icon=gms-logo.ico --out dist --no-package-manager"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,css,scss}": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ],
+    "__tests__/**/*.{js,jsx,ts,tsx,css,scss}": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ],
+    "__mocks__/**/*.{js,jsx,ts,tsx,css,scss}": [
+      "prettier --config ./.prettierrc --write",
+      "git add"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@gms/analyst-ui-core": "0.1.0",
+    "@types/lodash": "4.14.107",
+    "electron": "1.8.4",
+    "electron-context-menu": "0.9.1",
+    "redux-electron-store": "0.4.1",
+    "electron-json-storage": "4.1.0",
+    "electron-packager": "12.0.1",
+    "lint-staged": "7.0.5",
+    "lodash": "4.17.10",
+    "mocha": "5.1.1",
+    "prettier": "1.12.1",
+    "redux": "4.0.0",
+    "spectron": "3.8.0",
+    "ts-loader": "3.2.0",
+    "tslint": "5.9.1",
+    "tslint-eslint-rules": "5.1.0",
+    "tslint-language-service": "0.9.9",
+    "tslint-config-prettier": "1.12.0",
+    "tslint-react": "3.5.1",
+    "typescript": "2.8.3",
+    "webpack": "3.10.0"
+  }
+}

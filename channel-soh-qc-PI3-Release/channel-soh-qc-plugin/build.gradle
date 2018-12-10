@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+version '0.0.7'
+
+dependencies {
+    implementation project(':channel-soh-qc-algorithm')
+
+    implementation('gms.core.waveformqc:waveform-qc-plugin:0.0.7')
+    implementation('gms.core.waveformqc:waveform-qc-gateway-objects:0.0.7')
+
+    implementation 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+    implementation 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+}

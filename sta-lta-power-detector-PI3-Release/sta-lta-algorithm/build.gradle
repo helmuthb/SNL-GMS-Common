@@ -1,0 +1,6 @@
+dependencies {
+    testCompile 'junit:junit:4.12'
+    implementation 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+
+    testCompile 'org.mockito:mockito-core:2.+'
+}

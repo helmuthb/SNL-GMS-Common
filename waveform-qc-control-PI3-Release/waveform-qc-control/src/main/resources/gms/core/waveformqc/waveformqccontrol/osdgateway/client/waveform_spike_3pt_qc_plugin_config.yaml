@@ -1,0 +1,4 @@
+minConsecutiveSampleDifferenceSpikeThreshold: 0.8
+rmsAmplitudeRatioThreshold: 5.0
+rmsLeadSampleDifferences: 200
+rmsLagSampleDifferences: 200

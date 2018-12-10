@@ -1,0 +1,3 @@
+"""
+Makes stationreference a module
+"""

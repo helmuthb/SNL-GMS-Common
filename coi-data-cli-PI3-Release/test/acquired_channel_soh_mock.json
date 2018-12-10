@@ -1,0 +1,114 @@
+[
+  {
+    "id": "92b2a252-ca41-4827-9335-2c832bc90cc9",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "DEAD_SENSOR_CHANNEL",
+    "startTime": "1969-12-31T17:00:00Z",
+    "endTime": "1969-12-31T17:00:10Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  },
+  {
+    "id": "742b49e6-bdc9-4025-b9c2-e4a6e8e32c6d",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "VAULT_DOOR_OPENED",
+    "startTime": "1969-12-31T17:00:00Z",
+    "endTime": "1969-12-31T17:00:10Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  },
+  {
+    "id": "98562ec0-fad6-4611-a1a9-d037c65bcc88",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "GPS_RECEIVER_UNLOCKED",
+    "startTime": "1969-12-31T17:00:00Z",
+    "endTime": "1969-12-31T17:00:10Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  },
+  {
+    "id": "5e03b812-5083-4a92-bd22-91485b3f67f2",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "DEAD_SENSOR_CHANNEL",
+    "startTime": "1969-12-31T17:00:10Z",
+    "endTime": "1969-12-31T17:00:20Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  },
+  {
+    "id": "5c944248-8381-44f7-9213-b37b262d1780",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "VAULT_DOOR_OPENED",
+    "startTime": "1969-12-31T17:00:10Z",
+    "endTime": "1969-12-31T17:00:20Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  },
+  {
+    "id": "5f91b384-b912-40ed-8d23-eabc1ce58ac2",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "GPS_RECEIVER_UNLOCKED",
+    "startTime": "1969-12-31T17:00:10Z",
+    "endTime": "1969-12-31T17:00:20Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  },
+  {
+    "id": "dc028729-b333-4f38-82b0-f827d41a5308",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "type": "DEAD_SENSOR_CHANNEL",
+    "startTime": "1969-12-31T17:00:20Z",
+    "endTime": "1969-12-31T17:00:30Z",
+    "status": false,
+    "creationInfo": {
+      "creatorName": "OsdDemoDatabaseLoader",
+      "creationTime": "2018-01-05T15:58:16.722527Z",
+      "softwareInfo": {
+        "name": "OsdDemoDatabaseLoader",
+        "version": "1.0.0"
+      }
+    }
+  }
+]

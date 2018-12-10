@@ -1,0 +1,17 @@
+group 'gms.core.waveformsignalqc'
+version '0.0.7'
+
+repositories {
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    implementation project(':spike-3pt-qc-algorithm')
+    implementation 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+    implementation 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+
+    implementation('gms.core.waveformqc:waveform-qc-plugin:0.0.7')
+    implementation('gms.core.waveformqc:waveform-qc-gateway-objects:0.0.7')
+
+    testCompile 'org.mockito:mockito-core:2.+'
+}

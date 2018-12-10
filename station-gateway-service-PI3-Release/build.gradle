@@ -1,0 +1,268 @@
+/*
+ build.gradle
+ Gradle build configuration for GMS development
+ Maintained by: GMS System Team 
+*/
+
+buildscript {
+    // Identify repositories and assign credentials
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/sandbox_java_virtual"
+            /*
+             These are set in the gradle.properties file, which you
+             SHOULD NOT MODIFY
+             */
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+    dependencies {
+        // ALL TO-LEVEL DEPENDENCIES ARE EXPLICITY IDENTIFIED HERE
+        // Developers, YOU ***SHOULD*** MODIFY this section
+        classpath "org.hidetake:gradle-ssh-plugin:2.9.0"
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.5.4"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
+    }
+}
+
+
+// Apply Gradle plugins here, if you need extra ones for your builds
+allprojects {
+    apply plugin: "com.jfrog.artifactory"
+    apply plugin: "maven-publish"
+    apply plugin: "java-library"
+}
+
+// Publishing settings
+/*
+ Developers SHOULD NOT MODIFY this section, this is
+ maintained by the system team 
+*/
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+// Artifactory settings are used/set here
+/*
+ Developers SHOULD NOT MODIFY this section, this is
+ maintained by the system team 
+*/
+artifactory {
+    // The base Artifactory URL if not overridden by the publisher/resolver
+    contextUrl = "${artifactory_contextUrl}"
+
+    publish {
+        repository {
+            repoKey = 'sandbox_java_local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications('mavenJava')
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'sandbox_java_virtual'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
+}
+
+
+clean.doFirst {
+    // Delete log directories.
+    println "Deleting: ${rootDir}/stationreceiver-osdgateway-service/logs/"
+    println "Deleting: ${rootDir}/cd11dataprovider/logs/"
+    println "Deleting: ${rootDir}/cd11-common/logs/"
+    println "Deleting: ${rootDir}/dataman/logs/"
+    println "Deleting: ${rootDir}/connman/logs/"
+    println "Deleting: ${rootDir}/cd11dataprovider/logs/"
+    println "Deleting: ${rootDir}/integration-tests/logs/"
+
+    delete "${rootDir}/stationreceiver-osdgateway-service/logs/"
+    delete "${rootDir}/cd11-common/logs/"
+    delete "${rootDir}/cd11dataprovider/logs/"
+    delete "${rootDir}/dataman/logs/"
+    delete "${rootDir}/connman/logs/"
+    delete "${rootDir}/cd11dataprovider/logs/"
+    delete "${rootDir}/integration-tests/logs/"
+}
+
+subprojects {
+    group 'gms'
+    version '0.0.4'
+    apply plugin: "org.sonarqube"
+    apply plugin: "jacoco"
+
+    // Add compiler args during java compilation.
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+
+    dependencies {
+        implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+        implementation 'org.apache.logging.log4j:log4j-core:2.8.2'
+        testImplementation 'junit:junit:4.12'
+        testImplementation 'org.mockito:mockito-core:2.9.0'
+    }
+}
+
+project(':cd11-common') {
+    dependencies {
+        implementation 'com.google.guava:guava:23.0'
+        implementation 'org.apache.commons:commons-lang3:3.7'
+    }
+}
+
+project(':connman') {
+    apply plugin: 'application'
+    mainClassName = 'gms.dataacquisition.stationreceiver.cd11.connman.Application'
+
+    run {
+        if (System.getProperty("exec.args") != null) {
+            args System.getProperty("exec.args").split()
+        }
+        systemProperties System.properties
+    }
+
+    dependencies {
+        implementation project(':cd11-common')
+        implementation project(':dataman')
+        implementation project(':stationreceiver-osdgateway')
+
+        implementation 'com.google.guava:guava:23.0'
+        implementation 'com.netflix.archaius:archaius-core:0.7.6'
+        implementation 'org.apache.commons:commons-lang3:3.7'
+    }
+}
+
+project(':dataman') {
+    apply plugin: 'application'
+    mainClassName = 'gms.dataacquisition.stationreceiver.cd11.dataman.Application'
+
+    run {
+        if (System.getProperty("exec.args") != null) {
+            args System.getProperty("exec.args").split()
+        }
+        systemProperties System.properties
+    }
+
+    dependencies {
+        implementation project(':cd11-common')
+        implementation project(':stationreceiver-osdgateway')
+        implementation project(':stationreceiver-osdgateway-service')
+
+        implementation 'com.google.guava:guava:23.0'
+        implementation 'com.netflix.archaius:archaius-core:0.7.6'
+        implementation 'gms.shared.mechanisms.objectstoragedistribution:emerging-commonobjects:0.0.30'
+        implementation 'gms.utilities:waveman:0.0.4-SNAPSHOT'
+        implementation 'org.apache.commons:commons-lang3:3.7'
+
+        testImplementation project(':cd11dataprovider')
+    }
+}
+
+project(':cd11dataprovider') {
+    apply plugin: 'application'
+    mainClassName = 'gms.dataacquisition.stationreceiver.cd11.Application'
+
+    run {
+        if (System.getProperty("exec.args") != null) {
+            args System.getProperty("exec.args").split()
+        }
+        systemProperties System.properties
+    }
+
+    dependencies {
+        implementation project(':cd11-common')
+        implementation project(':stationreceiver-osdgateway')
+
+        implementation 'com.google.guava:guava:23.0'
+        implementation 'com.netflix.archaius:archaius-core:0.7.6'
+        implementation 'org.apache.commons:commons-lang3:3.7'
+    }
+}
+
+project(':stationreceiver-osdgateway') {
+    apply plugin: "java-library"
+    dependencies {
+        api 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+        api 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+        api 'gms.shared.mechanisms.objectstoragedistribution:osd-common:0.0.30'
+
+        implementation 'com.mashape.unirest:unirest-java:1.4.9'
+        implementation 'org.msgpack:jackson-dataformat-msgpack:0.7.1'
+    }
+}
+
+project(':stationreceiver-osdgateway-service') {
+    apply plugin: 'application' // This implicitly applies the 'java' plugin.
+    mainClassName = 'gms.dataacquisition.stationreceiver.osdgateway.service.Application'
+
+    run {
+        if (System.getProperty("exec.args") != null) {
+            args System.getProperty("exec.args").split()
+        }
+        // Set system properties that can be configured; setting all properties
+        // (e.g. systemProperties System.getProperties())
+        // makes this un-runnable in IntelliJ
+        if (System.getProperty("port") != null) {
+            systemProperty "port", System.getProperty("port")
+        }
+        if (System.getProperty("persistence_url") != null) {
+            systemProperty "persistence_url", System.getProperty("persistence_url")
+        }
+    }
+
+    dependencies {
+        implementation project(':stationreceiver-osdgateway')
+
+        implementation 'gms.shared.mechanisms.objectstoragedistribution:waveforms-repository:0.0.30'
+        implementation 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-repository:0.0.30'
+        implementation 'com.sparkjava:spark-core:2.6.0'
+        implementation 'com.netflix.archaius:archaius-core:0.7.6'
+
+        testImplementation 'com.mashape.unirest:unirest-java:1.4.9'
+    }
+}
+
+project(':dataframe-parser') {
+    apply plugin: "application"
+    mainClassName = 'gms.dataacquisition.stationreceiver.cd11.dataframeparser.Application'
+    dependencies {
+        implementation project(':cd11-common')
+        implementation project(':stationreceiver-osdgateway')
+        implementation project(':stationreceiver-osdgateway-service')
+        implementation 'com.netflix.archaius:archaius-core:0.7.6'
+        implementation 'gms.utilities:waveman:0.0.4-SNAPSHOT'
+    }
+}
+
+project(':integration-tests') {
+    apply plugin: "java-library"
+    dependencies {
+        testImplementation project(':cd11-common')
+        testImplementation project(':connman')
+        testImplementation project(':dataman')
+        testImplementation project(':cd11dataprovider')
+        testImplementation project(':stationreceiver-osdgateway')
+        testImplementation project(':stationreceiver-osdgateway-service')
+
+        testImplementation 'gms.shared.mechanisms.objectstoragedistribution:waveforms-repository:0.0.30'
+        testImplementation 'gms.shared.mechanisms.objectstoragedistribution:stationreference-repository:0.0.30'
+        testImplementation 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-repository:0.0.30'
+
+        testImplementation 'com.h2database:h2:1.4.196'
+    }
+}

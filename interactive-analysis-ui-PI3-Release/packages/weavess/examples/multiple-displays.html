@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Example - Multiple WEAVESS displays</title>
+        <script src="../dist/weavess.js"></script>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0px;
+                background-color: #222;
+                color: #ddd;
+            }
+            .wf-display {
+                width: 80%;
+                height: 40%;
+                border: 1px solid;
+            }
+            .container {
+                height: 100%;
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- create some bordered containers to place waveform displays -->
+        <div class="container">
+            <h1>wf-display-1</h1>
+            <div id="wf-display-1" class="wf-display"></div>
+            <h1>wf-display-2</h1>
+            <div id="wf-display-2" class="wf-display"></div>
+        </div>
+
+        <script type="application/javascript">
+
+            var display1Waveforms = [], display2Waveforms = [];
+            for (var i=0; i < 25; ++i) {
+                var channelName = "channel "+i;
+
+                var waveform = Weavess.createDummyWaveform(2500, Math.random() * 2, Math.random() * 0.25);
+                waveform.channel = channelName;
+                display1Waveforms.push(waveform);
+
+                waveform = Weavess.createDummyWaveform(2500, Math.random() * 2, Math.random() * 0.25);
+                waveform.channel = channelName;
+                display2Waveforms.push(waveform);
+            }
+
+            var wfDisplay = Weavess.initialize(document.getElementById("wf-display-1"), {
+                waveforms: display1Waveforms
+            });
+            var wfDisplay2 = Weavess.initialize(document.getElementById("wf-display-2"), {
+                waveforms: display2Waveforms
+            });
+
+
+        </script>
+    </body>
+</html>

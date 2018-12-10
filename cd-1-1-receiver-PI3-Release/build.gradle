@@ -1,0 +1,82 @@
+buildscript {
+    // Identify repositories and assign credentials
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/sandbox_java_virtual"
+            /*
+             These are set in the gradle.properties file, which you
+             SHOULD NOT MODIFY
+             */
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+
+    }
+    dependencies {
+        // ALL TO-LEVEL DEPENDENCIES ARE EXPLICITY IDENTIFIED HERE
+        // Developers, YOU ***SHOULD*** MODIFY this section
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.1"
+    }
+}
+
+
+allprojects {
+    group 'gms'
+    version '0.0.1'
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.artifactory'
+    
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        implementation group: 'gms', name: 'object-storage-distribution', version: '0.0.2'
+        testImplementation 'junit:junit:4.12'
+        testImplementation 'org.mockito:mockito-core:2.9.0'
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+
+    artifactory {
+        contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+
+        publish {
+            repository {
+                repoKey = 'sandbox_java_local'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+
+            }
+            defaults {
+                publications('mavenJava')
+            }
+        }
+        resolve {
+            repository {
+                repoKey = 'sandbox_java_virtual'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+
+            }
+        }
+    }
+}
+
+project(':receiver') {
+}
+

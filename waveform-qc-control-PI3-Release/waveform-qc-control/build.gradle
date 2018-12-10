@@ -1,0 +1,32 @@
+apply plugin: 'application'
+
+mainClassName = "gms.core.waveformqc.waveformqccontrol.Application"
+artifactoryPublish.skip = true
+
+dependencies {
+
+    // Waveform QC Control Dependencies
+    compile project(':waveform-qc-control-objects')
+    compile project(':waveform-qc-plugin')
+    compile project(':waveform-qc-gateway-objects')
+
+    // Waveform QC Plugin Dependencies
+    compile 'gms.core.channelsohqc:channel-soh-qc-plugin:0.0.7'
+    compile 'gms.core.waveformsignalqc:gap-qc-plugin:0.0.7'
+    compile 'gms.core.waveformsignalqc:repeated-amplitude-qc-plugin:0.0.7'
+    compile 'gms.core.waveformsignalqc:spike-3pt-qc-plugin:0.0.7'
+
+    // Other GMS dependencies
+    compile 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+
+    // Third party dependencies
+    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'org.yaml:snakeyaml:1.19'
+    compile 'com.netflix.archaius:archaius-core:0.7.6'
+
+    testCompile 'javax.xml.bind:jaxb-api:2.3.0'
+
+    testCompile 'org.mockito:mockito-core:2.+'
+    testCompile "com.github.tomakehurst:wiremock:2.13.0"
+}

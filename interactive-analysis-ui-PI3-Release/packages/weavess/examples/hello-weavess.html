@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Example - Hello WEAVESS!</title>
+    <script src="../dist/weavess.js"></script>
+    <style>
+        html,
+        body {
+            background-color: rgb(32, 43, 51);
+            color: #bbb;
+            margin: 0px;
+            height: 100%;
+            width: 100%;
+            font-family: sans-serif;
+        }
+
+        #weavess {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.5rem;
+            left: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="weavess"></div>
+    <script>
+        let MILLIS_TO_S = 1000;
+        let SAMPLE_RATE = 40;
+        let NUM_SAMPLES = SAMPLE_RATE * 600; // 10 minutes of data
+        let startTimeSecs = 1507593600; // Tue, 10 Oct 2017 00:00:00 GMT
+        let endTimeSecs = startTimeSecs + 1800 // + 30 minutes
+        let stations = [];
+
+        stations.push({
+            id: 'test',
+            name: 'test station',
+            height: 50,
+            defaultChannel: {
+                id: 'BHZ',
+                color: '#2965CC',                
+                name: 'BHZ',
+                sampleRate: 1,
+                displayType: ['LINE'],
+                dataSegments: [{
+                    data: [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
+                    startTimeSecs: startTimeSecs,
+                }]
+            },
+            nonDefaultChannels: [{
+                id: 'BHE',
+                color: '#2965CC',                
+                name: 'BHE',
+                sampleRate: 1,
+                displayType: ['SCATTER'],
+                dataSegments: [{
+                    data: [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
+                    startTimeSecs: startTimeSecs
+                }]
+            }, {
+                id: 'BHN',
+                color: '#2965CC',                
+                name: 'BHN',
+                sampleRate: 1,
+                displayType: ['LINE', 'SCATTER'],
+                dataSegments: [{
+                    data: [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1],
+                    startTimeSecs: startTimeSecs
+                }],
+                masks: [
+                    {
+                        startTimeSecs: startTimeSecs + 20,
+                        endTimeSecs: startTimeSecs + 40,
+                        color: 'green'
+                    }
+                ]
+            }]
+        });
+
+        // create 100 channels w/ random noise as data
+        for (let i = 0; i < 50; i++) {
+            let data = new Float32Array(NUM_SAMPLES);
+            for (let samp = 0; samp < NUM_SAMPLES; samp++) {
+                data[samp] = Math.pow(Math.random() - 0.5, 3) * 4
+            }
+
+            let data2 = new Float32Array(NUM_SAMPLES);
+            for (let samp = 0; samp < NUM_SAMPLES; samp++) {
+                data2[samp] = Math.pow(Math.random() - 0.5, 3) * 4
+            }
+
+            stations.push({
+                id: String(i),
+                name: 'station ' + i,
+                height: 50,
+                defaultChannel: {
+                    id: String(i),
+                    name: 'channel ' + i,
+                    sampleRate: SAMPLE_RATE,
+                    description: 'simulated data',
+                    signalDetections: [],
+                    displayType: ['LINE', 'SCATTER'],
+                    dataSegments: [{
+                        data: data,
+                        startTimeSecs: startTimeSecs
+                    }, {
+                        data: data2,
+                        startTimeSecs: startTimeSecs + 900
+                    }],
+                    signalDetections: [{
+                        id: '1',
+                        timeSecs: startTimeSecs + 450,
+                        color: 'red',
+                        label: 'P'
+                    }],
+                    masks: [
+                        {
+                            startTimeSecs: startTimeSecs + 20,
+                            endTimeSecs: startTimeSecs + 500,
+                            color: 'purple'
+                        }, {
+                            startTimeSecs: startTimeSecs + 60,
+                            endTimeSecs: startTimeSecs + 400,
+                            color: 'yellow'
+                        }, {
+                            startTimeSecs: startTimeSecs + 100,
+                            endTimeSecs: startTimeSecs + 200,
+                            color: 'green'
+                        }]
+                },
+                nonDefaultChannels: [],
+            })
+        }
+
+        var weavessOptions = {
+            startTimeSecs: startTimeSecs,
+            endTimeSecs: endTimeSecs,
+            stations: stations,
+            selections: {
+                channels: [],
+                signalDetections: [],
+            },
+            events: {
+                onContextMenu: function (e, channelId, sdId) { },
+                onChannelLabelClick: function (e, channelId) { },
+                onChannelClick: function (e, channelId, timeSecs) { },
+                onSignalDetectionClick: function (e, sdId) { },
+                onSignalDetectionDragEnd: function (sdId, timeSecs) { },
+                onKeyPress: function (e, clientX, clientY, channelId, timeSecs) { },
+                onMaskClick: function (event, channelId, maskId) { },
+            },
+            verticalMarkers: [{
+                timeSecs: 1507594200, // startTime + 10 minutes
+                lineStyle: 'solid',
+                color: 'green'
+            }, {
+                timeSecs: 1507594800, // startTime + 20 minutes
+                lineStyle: 'solid',
+                color: 'pink'
+            }]
+        };
+
+        var wfDisplay = Weavess.initialize(document.getElementById("weavess"), weavessOptions);
+
+    </script>
+</body>
+
+</html>

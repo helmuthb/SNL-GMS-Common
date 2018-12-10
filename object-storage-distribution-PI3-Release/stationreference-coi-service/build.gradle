@@ -1,0 +1,14 @@
+apply plugin: 'application'
+version '0.0.30'
+mainClassName = 'gms.shared.mechanisms.objectstoragedistribution.coi.stationreference.service.StationReferenceCoiServiceApplication'
+
+dependencies {
+    compile project (':stationreference-repository')
+
+    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.netflix.archaius:archaius-core:0.7.6'
+
+    testCompile group: 'com.mashape.unirest', name: 'unirest-java',version: '1.4.9'
+    testCompile 'org.mockito:mockito-core:2.+'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

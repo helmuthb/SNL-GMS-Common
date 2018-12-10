@@ -1,0 +1,3 @@
+#url_waveform_repo: http://localhost:8080/mechanisms/object-storage-distribution/waveforms/
+url_waveform_repo: http://waveforms-repository-service-dev-integration.gms-apps/mechanisms/object-storage-distribution/waveforms/
+url_signal_repo: http://signaldetection-repository-service-dev-integration.gms-apps/mechanisms/object-storage-distribution/signal-detection/

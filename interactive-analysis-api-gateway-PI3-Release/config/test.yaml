@@ -1,0 +1,55 @@
+# Overall variable to coordinate use of backend (mock) or OSD data
+# each config (station, qcMask...) have their own variable that uses this value by default
+useMockData: &MOCK_VALUE true
+
+# Test environment configuration settings
+# Even if empty, this file should be provided to prevent warnings
+# during unit & integration test exectution
+server:
+
+qcMask:
+# Configuration for the access to backend applications
+    backend:
+        # Configuration for mocking up backend services
+        mock:
+            # If true, mock up the backend services locally rather than
+            # connecting to the production services 
+            enable: *MOCK_VALUE
+            # Simulated service response delay used for mocked up services
+            serviceDelayMs: 20
+    accessor:
+        # Represents the configured type of data source the API Gateway provides access to - values:
+        #   Local - The API gateway loads data from local file storage for testing purposes
+        #   Service - The API gateway uses services to provide access to backend (e.g. OSD) data
+        source: Local
+station:
+    # TODO Remove once the backend supports station query by a list of IDs
+    defaultNetwork: DEMO
+    # Configuration for the access to backend applications
+    backend:
+        # Configuration for mocking up backend services
+        mock:
+            # If true, mock up the backend services locally rather than
+            # connecting to the production services 
+            enable: *MOCK_VALUE
+            # Simulated service response delay used for mocked up services
+            serviceDelayMs: 20
+config:
+    # The top-level key identifying UI-related configuration in the backend
+    # configuration store
+    backend:
+        mock:
+            # If true, mock up the backend services locally rather than
+            # connecting to the production services 
+            enable: true #*MOCK_VALUE
+            # Simulated service response delay used for mocked up services
+            serviceDelayMs: 0
+
+# Jest (e.g., `npm run test`) will automatically set the NODE_ENV environment
+# variable to `test`, which will cause this `test.yaml` file to get loaded.
+# Here we override the testData.waveformPath to use the embedded UEB test
+# dataset so that unit tests can pass without the full 24-hour UEB test
+# dataset.
+testData:
+    waveform:
+        waveformPath: resources/test_data/ueb_2010140/waveform

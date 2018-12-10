@@ -1,0 +1,11 @@
+node_modules/
+build/
+docs/
+package-lock.json
+*.log
+*.swp
+.DS_Store
+coverage/
+.scannerwork/
+
+fkDataLarge.json

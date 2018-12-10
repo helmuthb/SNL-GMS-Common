@@ -1,0 +1,20 @@
+apply plugin: 'application'
+
+mainClassName = "gms.core.signaldetection.signaldetectorcontrol.osdgateway.Application"
+
+dependencies {
+    compile project(':detector-control-objects')
+    compile project(':detector-control-gateway-objects')
+
+    compile 'gms.shared.mechanisms.objectstoragedistribution:waveforms-repository:0.0.30'
+    compile 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-repository:0.0.30'
+
+    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'org.apache.commons:commons-configuration2:2.2'
+    compile 'commons-beanutils:commons-beanutils:1.9.3'
+    compile 'org.msgpack:jackson-dataformat-msgpack:0.8.14'
+
+    testCompile 'javax.xml.bind:jaxb-api:2.3.0'
+    testCompile 'org.mockito:mockito-core:2.+'
+}

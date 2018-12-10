@@ -1,0 +1,95 @@
+/*
+ build.gradle
+ Gradle build configuration for GMS development
+ Maintained by: GMS System Team 
+*/
+buildscript {
+    // Identify repositories and assign credentials
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/sandbox_java_virtual"
+            /*
+             These are set in the gradle.properties file, which you
+             SHOULD NOT MODIFY
+             */
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+
+    }
+    dependencies {
+        // ALL TO-LEVEL DEPENDENCIES ARE EXPLICITY IDENTIFIED HERE
+        // Developers, YOU ***SHOULD*** MODIFY this section
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
+    }
+}
+
+allprojects {
+    apply plugin: "com.jfrog.artifactory"
+
+    group 'gms.core.waveformsignalqc'
+    version '0.0.7'
+}
+
+artifactoryPublish.skip = true
+
+// Apply Gradle plugins here, if you need extra ones for your builds
+subprojects {
+    apply plugin: "java-library"
+    apply plugin: "maven-publish"
+    apply plugin: 'org.sonarqube'
+    apply plugin: 'jacoco'
+    sourceCompatibility = 9
+
+    dependencies {
+        testImplementation group: 'junit', name: 'junit', version: '4.12'
+    }
+
+// Publishing settings
+/*
+ Developers SHOULD NOT MODIFY this section, this is
+ maintained by the system team 
+*/
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}
+
+// Artifactory settings are used/set here
+/*
+ Developers SHOULD NOT MODIFY this section, this is
+ maintained by the system team 
+*/
+artifactory {
+    // The base Artifactory URL if not overridden by the publisher/resolver
+    contextUrl = "${artifactory_contextUrl}"
+
+    publish {
+        repository {
+            repoKey = 'sandbox_java_local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+
+        }
+        defaults {
+            publications('mavenJava')
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'sandbox_java_virtual'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+
+        }
+    }
+}

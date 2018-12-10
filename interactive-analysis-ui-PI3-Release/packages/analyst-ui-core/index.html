@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="node_modules/cesium/Build/CesiumUnminified/Cesium.js"></script>
+    <style>
+    html, body {
+      margin: 0px;
+      height: 100%;
+    }
+
+    #app {
+      height: 100%;
+      width: 100%;
+    }
+    </style>
+  </head>
+  <body class="pt-dark">
+    <div id="app"></div>
+  </body>
+  <script>
+    if (window.require) {
+      window.electron = require('electron');
+    } else {
+      window.electron = null;
+    }
+  </script>
+  <script src="build/analyst-ui-core.js"></script>
+</html>

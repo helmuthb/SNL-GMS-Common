@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Example - Hello WEAVESS!</title>
+        <script src="../dist/weavess.js"></script>
+        <style>
+            html, body {
+                background-color: #222;
+                color: #ddd;
+                margin: 0px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="max-width: 700px; flex: 0 0 auto; margin: 3rem; margin-bottom: 0px;">
+            <p>See source code for example Weavess event callback bindings</p>
+        </div>
+        <div id="weavess" style="width: 90%; flex: 1 1 auto; margin: 3rem; outline: 1px solid; display: flex;"></div>
+
+        <script type="application/javascript">
+            var waveforms = [];
+
+            for (var i=0; i < 25; ++i) {
+                var channelName = "channel "+i;
+                let waveform = Weavess.createDummyWaveform(2500, Math.random() * 2, Math.random() * 0.25);
+                waveform.channel = channelName;
+                waveforms.push(waveform);
+            }
+
+            var weavessOptions = {
+                waveforms: waveforms,
+                flex : true,
+                events : {
+                    //upon creation of a signal detection, via right-click context menu or hotkey
+                    onSignalDetectionCreate : function(e) {
+                        console.log("signal detection created!");
+                        console.log(e);
+                    },
+                    //TODO still in progress
+                    onSignalDetectionDelete : function(e) {
+                        console.log("signal detection deleted!");
+                        console.log(e);
+                    },
+                    //TODO still in progress
+                    onSignalDetectionModify : function(e) {
+                        console.log("signal detection modified!");
+                        console.log(e);
+                    },
+                }
+            };
+            var wfDisplay = Weavess.initialize(document.getElementById("weavess"), weavessOptions);
+
+        </script>
+    </body>
+</html>

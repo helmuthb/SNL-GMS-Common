@@ -1,0 +1,15 @@
+version '0.0.30'
+apply plugin: 'application'
+
+mainClassName = 'gms.shared.mechanisms.objectstoragedistribution.coi.signaldetection.service.SignalDetectionRepositoryServiceApplication'
+
+dependencies {
+    compile project (':signaldetection-repository')
+
+    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.netflix.archaius:archaius-core:0.7.6'
+
+    testCompile 'com.mashape.unirest:unirest-java:1.4.9'
+    testCompile 'org.mockito:mockito-core:2.+'
+    testCompile 'junit:junit:4.12'
+}

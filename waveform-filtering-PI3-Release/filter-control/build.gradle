@@ -1,0 +1,31 @@
+apply plugin: 'application'
+
+mainClassName = "gms.core.signalenhancement.waveformfiltering.Application"
+
+dependencies {
+
+    // Filter Control Dependencies
+    compile project(':filter-control-plugin')
+    compile project(':filter-control-objects')
+
+    // Other GMS dependencies
+    compile 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+    compile 'gms.shared.mechanisms.objectstoragedistribution:emerging-commonobjects:0.0.30'
+    compile 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+
+
+    // Third party dependencies
+    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'org.yaml:snakeyaml:1.19'
+    compile 'org.apache.commons:commons-configuration2:2.2'
+    compile 'commons-beanutils:commons-beanutils:1.9.3'
+
+    testCompile 'javax.xml.bind:jaxb-api:2.3.0'
+    compile 'org.msgpack:jackson-dataformat-msgpack:0.8.14'
+
+    testCompile 'org.mockito:mockito-core:2.+'
+    testCompile "com.github.tomakehurst:wiremock:2.13.0"
+
+    implementation 'gms.core.signalenhancement:linear-waveform-filter:0.0.5'
+}

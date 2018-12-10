@@ -1,0 +1,40 @@
+/build
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+# IntelliJ
+*/out
+/out
+
+*/logs
+/logs
+
+*/shared-volume
+/shared-volume
+
+*/monitored-dir/*.json
+
+# All IntelliJ project files
+.idea
+
+### Gradle template
+.gradle
+*/build
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+*.class
+
+*.csv
+
+#local waveform values to plot
+dataframe-parser/*.txt

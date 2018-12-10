@@ -1,0 +1,3 @@
+api_host: localhost
+api_port: 8080
+template-dir: ./templates/

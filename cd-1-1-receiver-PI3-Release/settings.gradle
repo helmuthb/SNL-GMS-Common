@@ -1,0 +1,3 @@
+rootProject.name = 'cd-1-1-receiver'
+include 'receiver'
+

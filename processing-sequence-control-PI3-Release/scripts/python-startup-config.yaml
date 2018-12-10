@@ -1,0 +1,6 @@
+# 
+# This startup configuration file identifies those Nifi templates to import and start (captured as a list) into Nifi.
+# Note: Nifi templates included in the list below MUST be uploaded into Nifi and found in Nifi templates directory.
+#
+templates-to-start:
+    - 'Processing Sequence Example #3'

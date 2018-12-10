@@ -1,0 +1,3 @@
+"""
+Makes stationprocessing a module
+"""

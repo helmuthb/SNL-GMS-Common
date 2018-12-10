@@ -1,0 +1,255 @@
+# Default configuration settings
+# The application uses the config npm library (https://www.npmjs.com/package/config)
+# These settings are overridden by settings in the other configuration json files (e.g. production, test)
+# All file-base settings can be overridden by command-line arguments and environment variables
+# See the config library documentation for details
+
+# Overall variable to coordinate use of backend (mock) or OSD data
+# each config (station, qcMask...) have their own variable that uses this value by default
+useMockData: &MOCK_VALUE false
+
+# server module settings 
+server:
+    graphql:
+        # HTTP connection settings for GraphQL queries and mutations
+        http:
+            host: localhost
+            port: 3000
+            graphqlPath: /graphql   # GraphQL query/mutation/subscription path
+            graphiqlPath: /graphiql # GraphiQL browser-based IDE path
+            
+        # Websocket connection settings for GraphQL subscription support
+        ws:
+            host: localhost
+            port: 4000
+            path: /subscriptions
+# Configuration for common components of the API gateway
+common:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+# Configuration for the workflow API gateway
+workflow:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+    subscriptions:
+        # GraphQL subscription channel names
+        channels:
+            activityIntervalMarked: activityIntervalMarked
+            stageIntervalMarked: stageIntervalMarked
+            stageIntervalCreated: stageIntervalCreated
+            intervalCreated: intervalCreated
+    intervalService:
+        intervalCreationStartTimeSec: 1274400000 # Friday, May 21, 2010 12:00:00 AM GMT
+        intervalDurationSec: 7200
+        intervalCreationFrequencyMillis: 7200000
+
+# Configuration for the station reference API gateway
+stationReference:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+        
+# Configuration for the processing channel API gateway
+station:
+    # TODO Remove once the backend supports station query by a list of IDs
+    defaultNetwork: DEMO
+    # Configuration for the access to backend applications
+    backend:
+        # Configuration for mocking up backend services
+        mock:
+            # If true, mock up the backend services locally rather than
+            # connecting to the production services 
+            enable: *MOCK_VALUE
+            # Simulated service response delay used for mocked up services
+            serviceDelayMs: 20 
+        services:
+            networkByName:
+                requestConfig:
+                    method: get
+                    url: http://signaldetection-repository-service-dev-integration.gms-apps/mechanisms/object-storage-distribution/signal-detection/network
+                    tmeout: 60000
+                    responseType: json
+                    # Setting proxy to false causes the HTTP client to ignore proxy environment variables
+                    proxy: false
+
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+# Configuration for the waveform API gateway
+waveform:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+    subscriptions:
+        # GraphQL subscription channel names
+        channels:
+            # Subscription channel for notification of channel segments as they become available
+            waveformChannelSegmentsAdded: waveformChannelSegmentsAdded
+
+# Configuration for the signal detection API gateway
+signalDetection:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+    subscriptions:
+        # GraphQL subscription channel names
+        channels:
+            # Subscription channel for a newly-created signal detections
+            detectionsCreated: detectionsCreated
+            # Subscription channel for a single updated signal detection hypothesis
+            detectionUpdated: detectionUpdated
+            # Subscription channel for a collection of updated signal detection hypotheses
+            detectionsUpdated: detectionsUpdated
+            # Subscription channel for a collection of rejected signal detection hypotheses
+            detectionsRejected: detectionsRejected
+            # Subscription channel for when a signal detection hypothesis is updated
+            sdHypothesisUpdated: sdHypothesisUpdated
+
+# Configuration for the qc mask API gateway
+qcMask:
+    resolvers:
+        simulatedDelayMillis: 0 # ms deplay simulation on all resolver calls.
+    subscriptions:
+        # GraphQL subscription channel names
+        channels:
+            # Subscription channel for notification of QC masks that have changed
+            qcMasksUpdated: qcMasksUpdated
+    # Configuration for the access to backend applications
+    backend:
+        # Configuration for mocking up backend services
+        mock:
+            # If true, mock up the backend services locally rather than
+            # connecting to the production services 
+            enable: *MOCK_VALUE
+            # Simulated service response delay used for mocked up services
+            serviceDelayMs: 20 
+        services:
+            masksByChannelIds:
+                requestConfig:
+                    method: get
+                    url: http://signaldetection-repository-service-dev-integration.gms-apps/mechanisms/object-storage-distribution/signal-detection/qc-mask
+                    tmeout: 10000
+                    responseType: json
+                    # Setting proxy to false causes the HTTP client to ignore proxy environment variables
+                    proxy: false
+
+# Configuration for the fk data API gateway
+fk:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+    subscriptions:
+        # GraphQL subscription channel names
+        channels:
+            # Subscription channel for notification of fk data that have changed
+            fkCreated: fkCreated
+
+# Configuration for the event API gateway
+event:
+    resolvers:
+        simulatedDelayMillis: 20 # ms deplay simulation on all resolver calls.
+    subscriptions:
+        # GraphQL subscription channel names
+        channels:
+            # Subscription channel for an updated event  resulting from an in-place mutation
+            eventsUpdated: eventsUpdated
+            # Subscription channel for newly-created event hypotheses resulting from a
+            # mutation to an existing event
+            eventHypothesisCreated: eventHypothesisCreated
+            # Subscription channel for an updated event hypothesis resulting from an in-place mutation
+            eventHypothesisUpdated: eventHypothesisUpdated
+config:
+    # The top-level key identifying UI-related configuration in the backend
+    # configuration store
+    rootKey: ui
+    backend:
+        mock:
+            # If true, mock up the backend services locally rather than
+            # connecting to the production services 
+            enable: true #*MOCK_VALUE
+            # Simulated service response delay used for mocked up services
+            serviceDelayMs: 20
+        services:
+            configByKey:
+                requestConfig:
+                    method: get
+                    url: http://localhost:50000/config
+                    tmeout: 10000
+                    responseType: json
+                    # Setting proxy to false causes the HTTP client to ignore proxy environment variables
+                    proxy: false
+                url: 
+                timeoutMs: 10000
+                # Possible values: 'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
+                responseType: json
+
+
+# Configuration of test data for exercising API gateway services
+testData:
+    # Configuration for test data files in the GMS COI format (JSON)
+    coiFormat:
+        # Data set directory path - may be either absolute or relative
+        # to the `interactive-analysis-api-gateway` directory.
+        dataPath: resources/test_data/ueb_2010140/coi
+        # Filenames for metadata in the meta data directory
+        networkFileName: processingNetworks.json
+        stationFileName: processingStations.json
+        siteFileName: processingSites.json
+        channelFileName: processingChannels.json
+        channelSegmentFileName: channelSegments.json
+        signalDetectionFileName: signalDetections.json
+        analystFileName: analysts.json
+        intervalFileName: processingIntervals.json
+        stageFileName: stages.json
+        activityFileName: activities.json
+        stageIntervalFileName: stageIntervals.json
+        activityIntervalFileName: activityIntervals.json
+        qcMaskFileName: qcMasks.json
+        fkDataFileName: fkData.json
+        uiConfigFileName: uiConfig.json
+        # Configuration for late-arriving data files
+        lateData:
+            # Late data directory path - may be either absolute or relative
+            # to the `interactive-analysis-api-gateway` directory.
+            dataPath: resources/test_data/ueb_2010140/coi/late_data
+            fkDataFileName: fkDataLate.json
+            channelSegmentFileName: channelSegmentsLate.json
+            signalDetectionFileName: signalDetectionsLate.json
+
+    # Configuration for test data files in the CSS 3.0 format
+    cssFormat:
+        # Data set directory path - may be either absolute or relative
+        # to the `interactive-analysis-api-gateway` directory.
+        dataPath: resources/test_data/ueb_2010140/css
+        # Filenames for metadata in the meta data directory
+        wfdiscFileName: wfdisc.txt
+        arrivalFileName: arrival.txt
+        assocFileName: assoc.txt
+        originFileName: origin.txt
+        siteFileName: site.txt
+        # Configuration for late-arriving data files
+        lateData:
+            # Late data directory path - may be either absolute or relative
+            # to the `interactive-analysis-api-gateway` directory.
+            dataPath: resources/test_data/ueb_2010140/css/late_data
+            wfdiscFileName: wfdisc_late.txt
+            arrivalFileName: arrival_late.txt
+            assocFileName: assoc_late.txt
+
+    # Configuration for waveform data files in the .w format
+    waveform:
+        # `waveformMode` can be either `simulated` or `fromFile`.  If
+        # `fromFile`, then `waveformPath` specifies the directory where
+        # s4-formatted (32-bit signed integers) waveform files will be read.
+        # The path can be either absolute or relative to the
+        # `interactive-analysis-api-gateway` directory.  Environment
+        # variables of the form `${VAR}` in the path will be expanded.
+        waveformMode: fromFile
+        waveformPath: ${HOME}/Test_Data_Sets/UEB_2010140_s4/w
+
+    # Simulate a subset of the test data as being late-arriving - i.e.
+    # Push the data via GraphQL subscriptions after the configured delay
+    lateData:
+        # The number of late-arriving detections to make available in each late batch
+        detectionCount: 10
+        # The number of late-arriving detections to make available in each late batch
+        channelSegmentCount: 4     
+        # The delay between each late-arriving batch of data
+        delayMillis: 10000
+        # The delay prior to sending the first late signal detections
+        preStartDelay: 40000

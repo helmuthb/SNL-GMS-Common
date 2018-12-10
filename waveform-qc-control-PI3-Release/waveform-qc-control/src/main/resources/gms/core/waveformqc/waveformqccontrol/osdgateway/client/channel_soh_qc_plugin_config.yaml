@@ -1,0 +1,8 @@
+defaults:
+  mergeThreshold: PT0.037S
+  shouldCreateQcMasks: true
+overrides:
+  - type: DEAD_SENSOR_CHANNEL
+    mergeThreshold: PT0.050S
+  - type: GPS_RECEIVER_UNLOCKED
+    shouldCreateQcMasks: false

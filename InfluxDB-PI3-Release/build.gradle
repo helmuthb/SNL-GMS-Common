@@ -1,0 +1,77 @@
+buildscript {
+    repositories {
+        maven {
+            url 'http://gms-artifactory/artifactory/sandbox_java_virtual'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+
+    }
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.5.1"
+    }
+}
+
+apply plugin: 'maven-publish'
+apply plugin: "com.jfrog.artifactory"
+apply plugin: 'application'
+
+mainClassName = "application.PerformTest"
+
+group 'gms'
+version '0.0.1'
+sourceCompatibility = 1.8
+
+tasks.withType(JavaExec) {
+    jvmArgs = ['-Xms1g', '-Xmx4g']
+}
+
+dependencies {
+    implementation 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.3-SNAPSHOT'
+    implementation 'org.influxdb:influxdb-java:2.7'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.8.2'
+    implementation 'org.apache.commons:commons-lang3:3.7'
+    implementation 'org.postgresql:postgresql:42.1.4'
+    implementation 'org.hibernate:hibernate-core:5.2.12.Final'
+    implementation 'org.hibernate:hibernate-c3p0:5.2.12.Final'
+    implementation 'org.hibernate:hibernate-entitymanager:5.2.12.Final'
+    testImplementation 'junit:junit:4.12'
+}
+
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+artifactory {
+        contextUrl = "${artifactory_contextUrl}"
+        //The base Artifactory URL if not overridden by the publisher/resolver
+        publish {
+            repository {
+                repoKey = 'sandbox_java_local'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+            }
+            defaults {
+                publications('mavenJava')
+            }
+        }
+        resolve {
+            repository {
+                repoKey = 'sandbox_java_virtual'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+            }
+        }
+}

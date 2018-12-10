@@ -1,0 +1,3 @@
+"""
+Makes test a module
+"""

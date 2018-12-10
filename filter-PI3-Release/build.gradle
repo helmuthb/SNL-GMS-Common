@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/sandbox_java_virtual"
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+        classpath "gradle.plugin.org.gradle.java:experimental-jigsaw:0.1.1"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
+    }
+}
+
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 9
+
+group 'gms.shared.utilities.signalprocessing'
+version '0.0.5'
+
+dependencies {
+    api 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+    api 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+
+    testImplementation 'junit:junit:4.12'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"
+    //The base Artifactory URL if not overridden by the publisher/resolver
+
+    publish {
+        repository {
+            repoKey = 'sandbox_java_local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+        defaults {
+            publications('mavenJava')
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'sandbox_java_virtual'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
+}

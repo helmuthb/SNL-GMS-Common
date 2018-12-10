@@ -1,0 +1,77 @@
+{
+	"name": "interactive-analysis-ui",
+	"version": "1.1.1",
+	"description": "GMS Interactive Analysis",
+	"license": "UNLICENSED",
+	"repository": {
+		"type": "git",
+		"url": "https://gitlab/gms/core/interactive-analysis/interactive-analysis-ui"
+	},
+	"scripts": {
+		"bootstrap": "lerna bootstrap -- --no-shrinkwrap --no-package-lock",
+		"build": "lerna run build",
+		"ci-install-build": "npm install && npm run bootstrap && npm run build",
+		"test": "jest --coverage",
+		"sonar": "sonar-scanner -Dsonar.sources=packages/analyst-ui-core/src/ts,packages/analyst-ui-electron/src/ts,packages/ui-core-components/src/ts,packages/weavess/src/ts -Dsonar.projectKey=interactive-analysis-ui.${USER} -Dsonar.host.url=https://gms-sonar/sonar -Dsonar.typescript.lcov.reportPaths=packages/analyst-ui-core/coverage/lcov.info",
+		"start:deploy": "cd packages/analyst-ui-core && npm run start:deploy",
+		"start:dev": "cd packages/analyst-ui-core && npm run start:dev",
+		"start": "npm run start:deploy",
+		"clean": "lerna clean"
+	},
+	"jest": {
+		"setupFiles": [
+			"./test/jest-setup.ts"
+		],
+		"snapshotSerializers": [
+			"enzyme-to-json/serializer"
+		],
+		"transform": {
+			".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+		},
+		"testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+		"testPathIgnorePatterns": [
+			"workflow.test.tsx"
+		],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"json"
+		],
+		"modulePaths": [
+			"node_modules",
+			"<rootDir>/packages/analyst-ui-core/node_modules"
+		],
+		"moduleDirectories": [
+			"./node_modules"
+		],
+		"moduleNameMapper": {
+			"^react$": "<rootDir>/packages/analyst-ui-core/node_modules/react",
+			"^react-dom$": "<rootDir>/packages/analyst-ui-core/node_modules/react-dom",
+			"^analyst-ui/config$": "<rootDir>/packages/analyst-ui-core/src/ts/analyst-workspace/config/",
+			"^electron$": "<rootDir>/packages/analyst-ui-electron/node_modules/electron",
+			"worker-loader": "<rootDir>/packages/weavess/node_modules/worker-loader",
+			"loader-worker-loader$": "<rootDir>/packages/analyst-ui-core/node_modules/@gms/weavess/dist/lib/components/waveform-display/index.js",
+			"^analyst-ui/components/azimuth-slowness/fk-image-and-details$": "<rootDir>/packages/analyst-ui-core/src/ts/analyst-workspace/components/azimuth-slowness/fk-image-and-details",
+			"^analyst-ui/components/azimuth-slowness/fk-properties$": "<rootDir>/packages/analyst-ui-core/src/ts/analyst-workspace/components/azimuth-slowness/fk-properties",
+			".*\\.(css|less|styl|scss|sass)$": "<rootDir>/__mocks__/styleMock.ts",
+			".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.ts"
+		},
+		"coverageReporters": [
+			"lcov",
+			"html"
+		]
+	},
+	"devDependencies": {
+		"@types/jest": "22.2.3",
+		"enzyme": "3.3.0",
+		"enzyme-adapter-react-16": "1.1.1",
+		"enzyme-to-json": "3.3.3",
+		"jest": "22.4.3",
+		"lerna": "2.11.0",
+		"react-test-renderer": "16.3.2",
+		"sonar-scanner": "3.1.0",
+		"ts-jest": "22.4.4",
+		"typescript": "2.8.3"
+	}
+}

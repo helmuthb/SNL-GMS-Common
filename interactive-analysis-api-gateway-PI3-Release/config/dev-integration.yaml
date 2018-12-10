@@ -1,0 +1,7 @@
+# Overall variable to coordinate use of backend (mock) or OSD data
+# each config (station, qcMask...) have their own variable that uses this value by default
+useMockData: &MOCK_VALUE false
+
+# Override waveform test data path for dev-integration environment.
+testData:
+    waveformPath: /test_data_sets/UEB_2010140_s4/w

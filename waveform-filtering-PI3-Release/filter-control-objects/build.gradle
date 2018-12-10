@@ -1,0 +1,8 @@
+apply plugin: 'java-library'
+
+dependencies {
+    api project(':filter-control-gateway-objects')
+
+    api 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-commonobjects:0.0.30'
+    api 'gms.shared.mechanisms.objectstoragedistribution:waveforms-commonobjects:0.0.30'
+}

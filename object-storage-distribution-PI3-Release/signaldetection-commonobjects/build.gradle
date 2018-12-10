@@ -1,0 +1,28 @@
+apply plugin: 'java-library'
+version '0.0.30'
+
+dependencies {
+
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.8.2'
+
+    // TODO: resolve cross project dependencies.
+
+    // Dependencies: Need classes from the station reference project
+    api 'gms.shared.mechanisms.objectstoragedistribution:stationreference-commonobjects:0.0.30'
+
+    //utility (dependency is api as apache commons classes are publicly exposed)
+    api 'org.apache.commons:commons-lang3:3.6'
+
+    //serialization (dependencies are api as we expose our ObjectMapper as a singleton)
+    api 'com.fasterxml.jackson.core:jackson-databind:2.9.3'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3'
+
+    //utility (dependency is api as apache commons classes are publicly exposed)
+    //api 'org.apache.commons:commons-lang3:3.6'
+
+    //testing
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:2.4.6'
+    //testCompile project(':common')
+}

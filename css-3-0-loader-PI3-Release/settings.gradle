@@ -1,0 +1,7 @@
+rootProject.name = 'css-loader'
+include 'css-reader'
+include 'cssloader-client'
+include 'cssloader-osdgateway'
+include 'cssloader-osdgateway-service'
+include 'css-stationref-loader'
+

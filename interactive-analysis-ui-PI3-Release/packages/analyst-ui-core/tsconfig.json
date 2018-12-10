@@ -1,0 +1,49 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "jsx": "react",
+        "outDir": "./build/js",
+        "declaration": true,
+        "declarationDir": "./dist/types",
+        "allowJs": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": false,
+        "noImplicitReturns": false,
+        "noImplicitThis": false,
+        "suppressImplicitAnyIndexErrors": true,
+        "noFallthroughCasesInSwitch": true,
+        "strictNullChecks": false,
+        "noUnusedLocals": true,
+        "pretty": true,
+        "moduleResolution": "node",
+        "typeRoots": [
+            "@types",
+            "./@types",
+            "./node_modules/@types"
+        ],
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "baseUrl": "./",
+        "paths": {
+            "*": [
+                "./src/*",
+            ],
+            "analyst-ui/css*": [
+                "src/css*"
+            ],
+            "analyst-ui/*": [
+                "src/ts/analyst-workspace/*"
+            ]
+        },
+    },
+    "include": [
+        "src/ts/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

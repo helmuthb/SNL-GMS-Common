@@ -1,0 +1,12 @@
+@import "~@blueprintjs/core/src/blueprint.scss";
+
+.ag-row.event-list-disabled-row {
+    background-color: $dark-gray2;
+    filter: brightness(0.6) grayscale(1.0);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ag-row.event-list-open-event {
+    background-color: $gold2;
+}

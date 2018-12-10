@@ -1,0 +1,19 @@
+apply plugin: 'application'
+
+mainClassName = "gms.core.waveformqc.waveformqccontrol.osdgateway.Application"
+artifactoryPublish.skip = true
+
+dependencies {
+    compile project(':waveform-qc-control-objects')
+    compile project(':waveform-qc-gateway-objects')
+
+    compile 'gms.shared.mechanisms.objectstoragedistribution:waveforms-repository:0.0.30'
+    compile 'gms.shared.mechanisms.objectstoragedistribution:signaldetection-repository:0.0.30'
+    compile 'gms.shared.mechanisms.objectstoragedistribution:emerging-repository:0.0.30'
+
+    compile 'com.sparkjava:spark-core:2.7.1'
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'com.netflix.archaius:archaius-core:0.6.0'
+
+    testCompile 'org.mockito:mockito-core:2.+'
+}

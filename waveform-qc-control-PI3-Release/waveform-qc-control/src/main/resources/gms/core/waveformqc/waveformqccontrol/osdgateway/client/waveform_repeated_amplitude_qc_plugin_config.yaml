@@ -1,0 +1,3 @@
+minSeriesLengthInSamples: 750
+maxDeltaFromStartAmplitude: 85.0
+maskMergeThresholdSeconds: 0.075

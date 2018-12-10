@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        maven {
+            url "${artifactory_contextUrl}/sandbox_java_virtual"
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.5.1'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
+    }
+}
+
+group 'gms.core.signalenhancement'
+version '0.0.5'
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+sourceCompatibility = 9
+
+dependencies {
+        implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+        implementation 'org.apache.logging.log4j:log4j-core:2.8.2'
+        implementation 'gms.core.signalenhancement:filter-control-plugin:0.0.5'
+        implementation 'gms.shared.utilities.signalprocessing:filter:0.0.5'
+        testCompile 'junit:junit:4.12'
+}
+
+publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+}
+
+artifactory {
+        contextUrl = "${artifactory_contextUrl}"
+        //The base Artifactory URL if not overridden by the publisher/resolver
+        publish {
+            repository {
+                repoKey = 'sandbox_java_local'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+            }
+            defaults {
+                publications('mavenJava')
+            }
+        }
+        resolve {
+            repository {
+                repoKey = 'sandbox_java_virtual'
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+                maven = true
+            }
+        }
+}
+

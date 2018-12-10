@@ -1,0 +1,96 @@
+$foreground-color: #ddd;
+$background-color: #333;
+// Time axis
+/////////////////////////////////////////////////////////
+.weavess-axis {
+    path,
+    line {
+        fill: none;
+        stroke: $foreground-color;
+        shape-rendering: crispEdges;
+    }
+    text {
+        font-family: sans-serif;
+        font-size: 11px;
+        fill: #ddd;
+    }
+}
+
+// Time window
+/////////////////////////////////////////////////////////
+.weavess-time-window-center-bar:hover {
+    cursor: ew-resize;
+}
+
+.weavess-time-window-side-bar:hover {
+    cursor: col-resize;
+}
+
+// channel
+/////////////////////////////////////////////////////////
+.weavess-channel {
+    &:focus {
+        outline: none;
+    } // border-left: 1px solid; 
+    border-right: 1px solid;
+    border-bottom: 1px solid; // signal detections
+    .weavess-sd-label {
+        cursor: pointer;
+    }
+    .weavess-channel-label:hover {
+        cursor: pointer;
+    }
+    .weavess-measure-window-selection:hover {
+        cursor: move;
+    }
+}
+
+// channel Context Menu
+/////////////////////////////////////////////////////////
+.weavess-channel-context-menu {
+    background-color: $background-color;
+}
+
+.weavess-channel-context-menu-item:hover {
+    background-color: #aaa;
+    cursor: pointer;
+}
+
+// Measure Window
+/////////////////////////////////////////////////////////
+.weavess-measure-window {
+    .measure-window-divider:hover {
+        & div {
+            background-color: 'green';
+        }
+    }
+}
+
+// Waveform Display
+/////////////////////////////////////////////////////////
+.weavess-root {
+    *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    *::-webkit-scrollbar-track {
+        background-color: #222;
+    }
+    *::-webkit-scrollbar-corner {
+        background-color: #222;
+    }
+    *::-webkit-scrollbar-thumb {
+        background: #666;
+    }
+    * {
+        cursor: default;
+    }
+}
+
+.weavess-moveable-marker:hover {
+    cursor: col-resize;
+}
+
+.weavess-time-window-selection:hover {
+    cursor: move;
+}

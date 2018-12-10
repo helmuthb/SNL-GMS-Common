@@ -1,0 +1,46 @@
+{
+  "id": "46947cc2-8c86-4fa1-a764-c9b9944614b7",
+  "name": "CHAN01",
+  "type": "BROADBAND_HIGH_GAIN_VERTICAL",
+  "sites": {
+    "name": "testName",
+    "station": {
+      "name": "stationName",
+      "stationType": "SeismicArray",
+      "latitude": 500,
+      "longitude": 600,
+      "elevation": 0
+    },
+    "channels": "CHAN"
+  },
+  "instruments": {
+    "instrumentModel": "testModel",
+    "creationInfo": {
+      "creationTime": {
+        "epochSecond": 1511799395,
+        "nano": 855000000
+      },
+      "creatorName": "unit test creator name",
+      "softwareInfo": {
+        "name": "unit test component name",
+        "version": "unit test component version"
+      }
+    }
+  },
+  "calibration": {
+    "id": "ce7c377a-b6a4-478f-b3bd-5c934ee6b7ef",
+    "factor": 1.4,
+    "period": 1.0,
+    "creationInfo": {
+      "creationTime": {
+        "epochSecond": 1511799395,
+        "nano": 855000000
+      },
+      "creatorName": "unit test creator name",
+      "softwareInfo": {
+        "name": "unit test component name",
+        "version": "unit test component version"
+      }
+    }
+  }
+}

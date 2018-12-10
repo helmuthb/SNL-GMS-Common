@@ -1,0 +1,4 @@
+gms.core.waveformqc.channelsohqc.plugin.ChannelSohQcPluginComponent
+gms.core.waveformqc.waveformsignalqc.plugin.WaveformGapQcPluginComponent
+gms.core.waveformqc.waveformsignalqc.plugin.WaveformRepeatedAmplitudeQcPluginComponent
+gms.core.waveformqc.waveformsignalqc.plugin.WaveformSpike3PtQcPluginComponent

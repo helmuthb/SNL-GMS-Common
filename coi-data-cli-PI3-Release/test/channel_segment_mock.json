@@ -1,0 +1,52 @@
+{
+  "id": "57015315-f7b2-4487-b3e7-8780fbcfb413",
+  "processingChannelId": "46947cc2-8c86-4fa1-a764-c9b9944614b7",
+  "name": "segmentName",
+  "segmentType": "RAW",
+  "startTime": "1970-01-02T03:04:05.123Z",
+  "endTime": "1970-01-02T03:04:07.123Z",
+  "waveforms": [
+    {
+      "startTime": "1970-01-02T03:04:05.123Z",
+      "endTime": "1970-01-02T03:04:07.123Z",
+      "sampleRate": 2.0,
+      "sampleCount": 5,
+      "values": [
+        1.1,
+        2.2,
+        3.3,
+        4.4,
+        5.5
+      ]
+    },
+    {
+      "startTime": "1998-01-02T03:04:05.123Z",
+      "endTime": "1998-01-02T03:04:07.123Z",
+      "sampleRate": 5.0,
+      "sampleCount": 4,
+      "values": [
+        10,
+        9,
+        8,
+        7
+      ]
+    },
+    {
+      "startTime": "2000-01-02T03:04:05.123Z",
+      "endTime": "2000-01-02T03:04:07.123Z",
+      "sampleRate": 6.0,
+      "sampleCount": 1,
+      "values": [
+        10
+      ]
+    }
+  ],
+  "creationInfo": {
+    "creatorName": "Default creator name",
+    "softwareInfo": {
+      "name": "Default name",
+      "version": "Default version"
+    },
+    "creationTime": "2017-11-15T22:18:20.633Z"
+  }
+}

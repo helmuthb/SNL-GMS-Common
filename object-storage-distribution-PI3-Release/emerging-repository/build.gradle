@@ -1,0 +1,21 @@
+apply plugin: 'java-library'
+version '0.0.30'
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.8.2'
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+
+    // Dependencies: Some objects need CreationInfo
+    api project(':emerging-commonobjects')
+
+    // Utility (api dependency since Apache commons classes are publicly exposed)
+    api 'org.apache.commons:commons-lang3:3.6'
+
+    // Persistence (api dependencies since persistence.xml requires Hibernate)
+    api 'org.hibernate:hibernate-core:5.2.12.Final'
+    api 'org.hibernate:hibernate-c3p0:5.2.12.Final'
+    api 'org.hibernate:hibernate-entitymanager:5.2.12.Final'
+    api 'org.postgresql:postgresql:42.1.4'
+    testImplementation 'com.h2database:h2:1.4.196'
+}

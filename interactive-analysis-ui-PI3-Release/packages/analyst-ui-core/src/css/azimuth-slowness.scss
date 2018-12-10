@@ -1,0 +1,45 @@
+@import "~@blueprintjs/core/src/blueprint.scss";
+
+.gms-fk-thumbnail {
+    outline: 1px solid $gray3;
+
+    &:hover {
+        outline: 1px solid $red2;
+        cursor: pointer;
+    }
+
+    &.selected{
+        outline: 3px solid $red3;
+    }
+
+    .gms-fk-thumbnail-label {
+        color: $black;
+        background-color: $gold5;
+    }
+
+    .gms-fk-thumbnail-label-accepted {
+     background-color: $dark-gray3;
+    }
+
+    &:hover .gms-fk-thumbnail-label {
+        background-color: $red3;
+    }
+}
+
+.gms-azimuth-slowness-divider:hover {
+    div {
+        background-color: $forest3;
+    }
+}
+
+.fk-axis path, .fk-axis line {
+    fill: none;
+    stroke: #ddd;
+    shape-rendering: crispEdges;
+  }
+  
+  .fk-axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+    fill: #ddd;
+  }  

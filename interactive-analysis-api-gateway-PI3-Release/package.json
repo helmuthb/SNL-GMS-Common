@@ -1,0 +1,95 @@
+{
+  "name": "@gms/interactive-analysis-api-gateway",
+  "author": "GMS Development Team",
+  "version": "1.1.0",
+  "description": "",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab/gms/core/interactive-analysis/interactive-analysis-api-gateway"
+  },
+  "main": "build/server.js",
+  "scripts": {
+    "docs": "typedoc --out docs/ts . && mkdirp build && concat -o build/merged-schema.graphql resources/graphql/common/schema.graphql resources/graphql/station/schema.graphql resources/graphql/signal-detection/schema.graphql resources/graphql/event/schema.graphql resources/graphql/waveform/schema.graphql resources/graphql/workflow/schema.graphql resources/graphql/qc-mask/schema.graphql resources/graphql/fk/schema.graphql && graphdoc --force --output docs/graphql --schema build/merged-schema.graphql",
+    "build": "tsc --project ./tsconfig.json && copyfiles -u 2 \"src/ts/**/*.graphql\" build",
+    "ci-install-build": "npm install && npm run build",
+    "build-bundle": "webpack --progress",
+    "test": "jest --coverage",
+    "sonar": "sonar-scanner -Dsonar.sources=src/ts -Dsonar.projectKey=interactive-analysis-api-gateway.${USER} -Dsonar.host.url=https://gms-sonar/sonar -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info",
+    "clean": "rimraf build docs",
+    "watch": "tsc --project ./tsconfig.json --watch --pretty",
+    "start:deploy": "node ./build/api-gateway.bundle.js",
+    "start:dev": "npm run build && node ./build/server.js",
+    "start": "npm run start:dev"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ]
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@2fd/graphdoc": "2.4.0",
+    "@types/express": "4.0.36",
+    "@types/graphql": "0.10.2",
+    "@types/jest": "20.0.8",
+    "@types/lodash": "4.14.72",
+    "@types/msgpack-lite": "0.1.5",
+    "@types/uuid": "3.4.1",
+    "axios": "0.18.0",
+    "axios-mock-adapter": "1.15.0",
+    "concat": "1.0.3",
+    "copyfiles": "1.2.0",
+    "jest": "20.0.4",
+    "jest-cli": "20.0.4",
+    "mkdirp": "0.5.1",
+    "rimraf": "2.6.1",
+    "ts-jest": "20.0.10",
+    "ts-loader": "2.2.2",
+    "tslint": "5.6.0",
+    "tslint-eslint-rules": "4.1.1",
+    "tslint-language-service": "0.9.6",
+    "tslint-react": "3.2.0",
+    "typedoc": "0.8.0",
+    "typescript": "2.4.2",
+    "webpack": "2.7.0",
+    "winston-daily-rotate-file": "1.7.2"
+  },
+  "dependencies": {
+    "@types/winston": "2.3.6",
+    "apollo-server-express": "1.3.2",
+    "axios": "0.18.0",
+    "axios-mock-adapter": "1.15.0",
+    "body-parser": "1.17.2",
+    "config": "1.26.2",
+    "csv-parse": "1.2.2",
+    "express": "4.15.4",
+    "geolib": "2.0.24",
+    "graphql": "0.10.5",
+    "graphql-subscriptions": "0.4.4",
+    "graphql-tools": "1.2.1",
+    "js-yaml": "3.9.1",
+    "lodash": "4.17.4",
+    "moment": "2.18.1",
+    "msgpack-lite": "0.1.26",
+    "nock": "^9.2.3",
+    "node-fetch": "^2.1.1",
+    "sonar-scanner": "3.0.3",
+    "subscriptions-transport-ws": "0.8.2",
+    "typescript-logging": "0.4.0",
+    "uuid": "3.1.0",
+    "winston": "2.4.0"
+  }
+}

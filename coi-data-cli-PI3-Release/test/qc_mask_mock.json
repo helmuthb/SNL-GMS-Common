@@ -1,0 +1,86 @@
+[
+  {
+    "id": "b0142994-3caa-4705-93ff-3ac9a5665510",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "qcMaskVersions": [
+      {
+        "version": 0,
+        "parentQcMasks": [
+          {
+            "qcMaskId": "00000000-0000-0000-0000-000000000000",
+            "qcMaskVersionId": 1
+          },
+          {
+            "qcMaskId": "00000000-0000-0000-0000-000000000000",
+            "qcMaskVersionId": 2
+          }
+        ],
+        "channelSegmentIds": [
+          "00000000-0000-0000-0000-000000000000"
+        ],
+        "category": "STATION_SOH",
+        "type": "SENSOR_PROBLEM",
+        "rationale": "System created: dead sensor channel",
+        "startTime": -25080,
+        "endTime": -24960,
+        "creationInfoId": "00000000-0000-0000-0000-000000000000"
+      }
+    ]
+  },
+  {
+    "id": "3173ccc5-ae8b-4e4f-8fcd-48ba9420c8b4",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "qcMaskVersions": [
+      {
+        "version": 0,
+        "parentQcMasks": [
+          {
+            "qcMaskId": "00000000-0000-0000-0000-000000000000",
+            "qcMaskVersionId": 1
+          },
+          {
+            "qcMaskId": "00000000-0000-0000-0000-000000000000",
+            "qcMaskVersionId": 2
+          }
+        ],
+        "channelSegmentIds": [
+          "00000000-0000-0000-0000-000000000000"
+        ],
+        "category": "STATION_SOH",
+        "type": "STATION_SECURITY",
+        "rationale": "System created: vault door opened",
+        "startTime": -25020,
+        "endTime": -24960,
+        "creationInfoId": "00000000-0000-0000-0000-000000000000"
+      }
+    ]
+  },
+  {
+    "id": "ee625d5c-6f29-4bf1-b791-cc02b96ad43a",
+    "processingChannelId": "7b23a6fb-d001-4354-9bb5-7fcb49a530b8",
+    "qcMaskVersions": [
+      {
+        "version": 0,
+        "parentQcMasks": [
+          {
+            "qcMaskId": "00000000-0000-0000-0000-000000000000",
+            "qcMaskVersionId": 1
+          },
+          {
+            "qcMaskId": "00000000-0000-0000-0000-000000000000",
+            "qcMaskVersionId": 2
+          }
+        ],
+        "channelSegmentIds": [
+          "00000000-0000-0000-0000-000000000000"
+        ],
+        "category": "STATION_SOH",
+        "type": "STATION_SECURITY",
+        "rationale": "System created: vault door opened",
+        "startTime": -24840,
+        "endTime": -24780,
+        "creationInfoId": "00000000-0000-0000-0000-000000000000"
+      }
+    ]
+  }
+]

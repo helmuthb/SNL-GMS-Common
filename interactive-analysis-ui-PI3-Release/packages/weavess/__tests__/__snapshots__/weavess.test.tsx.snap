@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test to see if the waveform display renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "display": "flex",
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "flex": "1 1 auto",
+        "position": "relative",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "bottom": "0px",
+          "left": "0px",
+          "position": "absolute",
+          "right": "0px",
+          "top": "0px",
+        }
+      }
+    >
+      <WaveformDisplay
+        defaultZoomWindow={
+          Object {
+            "endTimeSecs": 1274320801,
+            "startTimeSecs": 1274313599,
+          }
+        }
+        endTimeSecs={1274320801}
+        flex={false}
+        startTimeSecs={1274313599}
+        stations={
+          Array [
+            Object {
+              "defaultChannel": Object {
+                "color": "dodgerblue",
+                "dataSegments": Array [
+                  Object {
+                    "data": Array [],
+                    "startTimeSecs": 1274313599,
+                  },
+                ],
+                "displayType": Array [
+                  "LINE",
+                ],
+                "id": "Beam",
+                "name": "Beam",
+                "pointSize": 2,
+                "sampleRate": 40,
+              },
+              "height": 75,
+              "id": "Beam",
+              "name": "Beam",
+              "nonDefaultChannels": Array [],
+            },
+            Object {
+              "defaultChannel": Object {
+                "color": "dodgerblue",
+                "dataSegments": Array [
+                  Object {
+                    "data": Array [],
+                    "startTimeSecs": 1274313599,
+                  },
+                ],
+                "displayType": Array [
+                  "LINE",
+                  "SCATTER",
+                ],
+                "id": "Fstat",
+                "name": "Fstat",
+                "pointSize": 2,
+                "sampleRate": 40,
+              },
+              "height": 75,
+              "id": "Fstat",
+              "name": "Fstat",
+              "nonDefaultChannels": Array [],
+            },
+            Object {
+              "defaultChannel": Object {
+                "color": "dodgerblue",
+                "dataSegments": Array [
+                  Object {
+                    "data": Array [],
+                    "startTimeSecs": 1274313599,
+                  },
+                ],
+                "displayType": Array [
+                  "LINE",
+                  "SCATTER",
+                ],
+                "id": "Azimuth",
+                "name": "Azimuth",
+                "pointSize": 2,
+                "sampleRate": 40,
+              },
+              "height": 75,
+              "id": "Azimuth",
+              "name": "Azimuth",
+              "nonDefaultChannels": Array [],
+            },
+            Object {
+              "defaultChannel": Object {
+                "color": "dodgerblue",
+                "dataSegments": Array [
+                  Object {
+                    "data": Array [],
+                    "startTimeSecs": 1274313599,
+                  },
+                ],
+                "displayType": Array [
+                  "LINE",
+                  "SCATTER",
+                ],
+                "id": "Slowness",
+                "name": "Slowness",
+                "pointSize": 2,
+                "sampleRate": 40,
+              },
+              "height": 75,
+              "id": "Slowness",
+              "name": "Slowness",
+              "nonDefaultChannels": Array [],
+            },
+          ]
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

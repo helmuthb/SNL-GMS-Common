@@ -1,0 +1,37 @@
+@import "~@blueprintjs/core/src/blueprint.scss";
+
+
+body {
+    background-color: $dark-gray1
+}
+
+// TODO be less ham-fisted about this.
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+*::-webkit-scrollbar-track {
+    background-color: #222;
+}
+*::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 2px;
+}
+
+:focus {
+    outline: none;
+}
+
+// override some focus styles from blueprint that dont look good.
+.pt-control input:focus ~ .pt-control-indicator {
+    outline: none;
+    outline-offset: 0px;
+}
+
+.max {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}

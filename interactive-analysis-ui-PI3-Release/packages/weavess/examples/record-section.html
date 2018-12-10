@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Example - Hello WEAVESS!</title>
+    <script src="../dist/weavess.js"></script>
+    <style>
+        html,
+        body {
+            background-color: #222;
+            color: #ddd;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="max-width: 700px; flex: 0 0 auto; margin: 3rem; margin-bottom: 0px;">
+        <!--<h1>Basic Weavess usage:</h1>
+            <h3>Zoom/Pan</h3>
+            <ul>
+                <li>Zoom in: Ctrl+MouseWheelUp</li>
+                <li>Zoom out: Ctrl+MouseWheelDown</li>
+                <li>Pan right: Ctrl+Shift+MouseWheelUp</li>
+                <li>Pan left: Ctrl+Shift+MouseWheelDown</li>
+            </ul>
+            <h3>Manipulate Signal Detections</h3>
+            <ul>
+                <li>Add detection: RightClick | Ctrl+(p)</li>
+            </ul>-->
+    </div>
+
+    <div id="weavess" style="position: absolute; top: 2rem; left:2rem; right: 2rem; bottom: 2rem;"></div>
+
+    <script>
+        //TODO make this work.
+        var recordSection = Weavess.initializeRecordSection(document.getElementById('weavess'));
+
+        recordSection.update(true);
+
+        recordSection.addWaveformArray([{
+            channel: 'close',
+            data: Array.apply(null, Array(100000)).map(function () {
+                return Math.round(Math.random() * 100);
+            }),
+            distance: 1079184.644731988, //in meters
+            phase: 'P',
+            startTime: new Date('2016-01-01T00:00:00Z').valueOf() / 1000.0,
+            sampleRate: 40,
+            signalDetection: [{
+                time: new Date('2016-01-01T00:02:30Z'),
+                id: 0,
+                color: '#f00',
+                label: 's'
+            }]
+        },
+        {
+            channel: 'medium',
+            data: Array.apply(null, Array(100000)).map(function () {
+                return Math.round(Math.random() * 5000);
+            }),
+            distance: 3379184.644731988,
+            phase: 'P',
+            startTime: new Date('2016-01-01T00:00:00Z').valueOf() / 1000.0,
+            sampleRate: 40,
+            signalDetection: [{
+                time: new Date('2016-01-01T00:05:00Z'),
+                id: 1,
+                color: '#f00',
+                label: ''
+            }]
+        },
+        {
+            channel: 'far',
+            data: Array.apply(null, Array(100000)).map(function () {
+                return Math.round(Math.random() * 5000);
+            }),
+            distance: 3914023.8687042934,
+            phase: 'P',
+            startTime: new Date('2016-01-01T00:00:00Z').valueOf() / 1000.0,
+            sampleRate: 40,
+            signalDetection: [{
+                time: new Date('2016-01-01T00:10:00'),
+                id: 2,
+                color: '#f00',
+                label: ''
+            }]
+        }],
+            false
+        );
+
+        recordSection.update(false);
+    </script>
+</body>
+
+</html>

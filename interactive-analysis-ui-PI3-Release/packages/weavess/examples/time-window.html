@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Example - Hello WEAVESS!</title>
+        <script src="../dist/weavess.js"></script>
+        <style>
+            html, body {
+                background-color: #222;
+                color: #ddd;
+                margin: 0px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="weavess" style="width: 80%; height: 200px;"></div>
+
+        <script type="application/javascript">
+            var waveforms = [];
+            
+            for (var i=0; i < 10; ++i) {
+                var channelName = "channel "+i;
+                let waveform = Weavess.createDummyWaveform(2500, Math.random() * 2, Math.random() * 0.25);
+                waveform.channel = channelName;
+                waveforms.push(waveform);
+            }
+
+            var weavessOptions = {
+                //pass the time window as part of an input object to the Weavess display.
+                waveforms: waveforms,
+                timeWindow : {
+                    center : "2016-01-01T00:00:30Z",
+                    size : "3000", //duration in milliseconds (decimals OK)
+                    onMove : function(e) {
+                        console.log("time window move callback");
+                        console.log(e);
+                    },
+                    onResize : function(e) {
+                        console.log("time window resize callback");
+                        console.log(e);
+                    }
+                }
+            };
+            var wfDisplay = Weavess.initialize(document.getElementById("weavess"), weavessOptions);
+
+        </script>
+    </body>
+</html>

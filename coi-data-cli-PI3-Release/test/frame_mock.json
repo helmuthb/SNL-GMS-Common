@@ -1,0 +1,19 @@
+[
+  {
+    "id":"12347cc2-8c86-4fa1-a764-c9b9944614b7",
+    "stationId":"c0ba483a-b673-4806-9d19-f94d9692f16a",
+    "acquisitionProtocol":"CD11",
+    "stationName":"staName",
+    "payloadDataStartTime":"1970-01-02T03:04:05.123Z",
+    "payloadDataEndTime":"1970-01-02T03:04:07.123Z",
+    "receptionTime":"1970-01-02T03:04:17.123Z",
+    "rawPayload":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+    "authenticationStatus":"AUTHENTICATION_SUCCEEDED",
+    "creationInfo":{
+      "creatorName":"Default creator name",
+      "creationTime":"2018-03-27T16:49:31.473807Z",
+      "softwareInfo":{
+        "name":"Default name","version":"Default version"}
+    }
+  }
+]

@@ -1,0 +1,7 @@
+obspy
+requests
+requests_mock
+pandas
+msgpack-python
+pyyaml
+termcolor
